@@ -1,0 +1,5 @@
+/Simple64/.vs/Simple64/v16/*.suo
+.vs
+Debug/
+Release/
+*.user
