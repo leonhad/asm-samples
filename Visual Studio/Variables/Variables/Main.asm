@@ -2,11 +2,18 @@
 .386
 .model flat,stdcall
 .stack 4096
+
+.data
+num1 dword 11111111h ; First number
+num2 dword 10101010h ; Seconf number
+ans  dword 0 ; Result
+
 .code
 main PROC
-	mov eax, 10000h ; EAX = 10000h
-	add eax, 40000h ; EAX = 50000h
-	sub eax, 20000h ; EAX = 30000h
+	mov eax, num1
+	add eax, num2
+	mov ans, eax
+
 	ret
 main ENDP
 END main
