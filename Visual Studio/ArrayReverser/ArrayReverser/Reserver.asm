@@ -17,21 +17,21 @@ Reverser PROC
 	mov ecx, [ebp+16]	; ECX = Size
 	test ecx, ecx
 
-	lea esi, [esi+ecx*4-4] ; Load the efective address
+	lea esi, [esi+ecx*4-4] ; Load the efective address (end of source address - word).
 	pushfd				; Stores the direction flags
-	std
+	std					; Sets direction to downwards
 
 @@:
-	lodsd
-	mov [edi], eax
-	add edi, 4
-	dec ecx
+	lodsd				; Load String of source downwards.
+	mov [edi], eax		; Store wor in destination array.
+	add edi, 4			; Increments destination array address.
+	dec ecx				; Decrements copy size.
 	jnz @B				; Jump non zero to @ before
 
-	popfd
+	popfd				; Restores direction flag.
 	mov eax,1
 
-	; epilog
+	; Routine epilog.
 	pop edi
 	pop esi
 	pop ebp
