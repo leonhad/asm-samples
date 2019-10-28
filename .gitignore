@@ -331,3 +331,6 @@ ASALocalRun/
 
 *.exe
 *.MAP
+.DS_Store
+NASM/MacOSX/64
+*.o
