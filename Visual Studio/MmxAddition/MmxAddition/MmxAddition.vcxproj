@@ -155,6 +155,9 @@
     <ClInclude Include="MiscDef.h" />
     <ClInclude Include="MmxVal.h" />
   </ItemGroup>
+  <ItemGroup>
+    <MASM Include="MmxAdd.asm" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />

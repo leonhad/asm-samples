@@ -30,4 +30,9 @@
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <MASM Include="MmxAdd.asm">
+      <Filter>Arquivos de Origem</Filter>
+    </MASM>
+  </ItemGroup>
 </Project>
