@@ -18,7 +18,7 @@ char* MmxVal::ToString_i16(char* s, size_t len)
 
 char* MmxVal::ToString_i32(char* s, size_t len)
 {
-	sprintf_s(s, len, "%12d %12d", i16[0], i16[1]);
+	sprintf_s(s, len, "%12d %12d", i32[0], i32[1]);
 
 	return s;
 }
