@@ -22,7 +22,7 @@
   </DaveTm>
 
   <Target>
-    <TargetName>ARM Cotext M4</TargetName>
+    <TargetName>ARM Cortex M3</TargetName>
     <ToolsetNumber>0x4</ToolsetNumber>
     <ToolsetName>ARM-ADS</ToolsetName>
     <TargetOption>
@@ -142,8 +142,8 @@
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>
-          <SubType>1</SubType>
-          <ItemText>0x20000000</ItemText>
+          <SubType>0</SubType>
+          <ItemText>0x410</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
@@ -151,7 +151,7 @@
         <THDelay>0</THDelay>
       </Tracepoint>
       <DebugFlag>
-        <trace>0</trace>
+        <trace>1</trace>
         <periodic>1</periodic>
         <aLwin>1</aLwin>
         <aCover>0</aCover>
@@ -194,7 +194,7 @@
 
   <Group>
     <GroupName>app</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
