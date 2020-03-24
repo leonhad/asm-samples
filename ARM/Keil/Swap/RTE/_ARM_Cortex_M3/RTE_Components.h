@@ -4,7 +4,7 @@
  *      *** Do not modify ! ***
  *
  * Project: 'Swap' 
- * Target:  'ARM Cortex M4' 
+ * Target:  'ARM Cortex M3' 
  */
 
 #ifndef RTE_COMPONENTS_H
