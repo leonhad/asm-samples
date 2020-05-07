@@ -1,0 +1,13 @@
+ORG &8000
+
+LD A,4
+INC A
+INC A
+
+LD B, 10
+
+; ADD A, B
+ADD B
+
+LD (&7000), A
+ret
