@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.28)
+project(helloworld)
+
+enable_language(ASM_NASM)
+set(CMAKE_ASM_NASM_COMPILE_OBJECT "<CMAKE_ASM_NASM_COMPILER> <INCLUDES> <FLAGS> -o <OBJECT> <SOURCE>")
+set(CMAKE_ASM_NASM_LINK_EXECUTABLE "ld <CMAKE_ASM_NASM_LINK_FLAGS> <LINK_FLAGS> <OBJECTS>  -o <TARGET> <LINK_LIBRARIES>")
+add_compile_options(
+        "$<$<COMPILE_LANGUAGE:ASM_NASM>:-f $<IF:$<BOOL:$<TARGET_PROPERTY:NASM_OBJ_FORMAT>>, \
+    $<TARGET_PROPERTY:NASM_OBJ_FORMAT>, ${CMAKE_ASM_NASM_OBJECT_FORMAT}>>"
+)
+
+
+set(CMAKE_CXX_STANDARD 23)
+set(SOURCE_FILES helloworld.asm)
+
+set_source_files_properties(${SOURCE_FILES} PROPERTIES LANGUAGE ASM_NASM)
+set(CMAKE_ASM_NASM_OBJECT_FORMAT elf64)
+
+add_executable(helloworld ${SOURCE_FILES})
+set_target_properties(helloworld PROPERTIES NASM_OBJ_FORMAT elf64)
