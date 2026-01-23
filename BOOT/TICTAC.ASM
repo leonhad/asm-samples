@@ -20,7 +20,36 @@ b09:
 
 b10:
     call show_board
-    int 0x20
+
+    call get_movement
+    mov byte [bx],'X'   ; Get movement
+
+    call show_board     ; Show the board
+    
+    call get_movement   ; Get movement
+    mov byte [bx],'0'   ; Put 0 into square
+
+    jmp b10
+
+get_movement:
+    call read_keyboard
+    cmp al,0x1b         ; ESC key pressed?
+    je do_exit          ; Yes, exit
+    sub al,0x31         ; Subtract code for ASCII digit 1
+    jc get_movement     ; Is it less than? Wait for another key
+    cmp al,0x09         ; Compaarison with 9
+    jnc get_movement    ; Is it greater then or equal to? Wait
+    cbw                 ; Expand AL to 16 bits using AH
+    mov bx,board        ; BX points to board
+    add bx,ax           ; Add the key entered
+    mov al,[bx]         ; Get square content
+    cmp al,0x40         ; Comparison with 0x40
+    jnc get_movement    ; Is it greater than or equal to? Wait
+    call show_crlf      ; Line change
+    ret                 ; Return, now BX points to square
+
+do_exit:
+    int 0x20            ; Exit to command-line
 
 show_board:
     mov bx,board
