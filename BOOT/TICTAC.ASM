@@ -20,14 +20,16 @@ b09:
 
 b10:
     call show_board
+    call find_line
 
     call get_movement
     mov byte [bx],'X'   ; Get movement
 
     call show_board     ; Show the board
+    call find_line 
     
     call get_movement   ; Get movement
-    mov byte [bx],'0'   ; Put 0 into square
+    mov byte [bx],'O'   ; Put O into square
 
     jmp b10
 
@@ -93,6 +95,85 @@ show_square:
     mov al,[bx]
     inc bx
     jmp display_letter
+
+find_line:
+    ; First horizontal row
+    mov al,[board]      ; X.. ... ...
+    cmp al,[board+1]    ; .X. ... ...
+    jne b01
+    cmp al,[board+2]    ; ..X ... ...
+    je won
+
+b01:
+    ; Leftmost vertical row
+    cmp al,[board+3]    ; ... X.. ...
+    jne b04
+    cmp al,[board+6]    ; ... ... X..
+    je won
+
+b04:
+    ; Fist diagonal
+    cmp al,[board+4]    ; ... .X. ...
+    jne b05
+    cmp al,[board+8]    ; ... ... ..X
+    je won
+
+b05:
+    ; Second horizontal row
+    mov al,[board+3]    ; ... X.. ...
+    cmp al,[board+4]    ; ... .X. ...
+    jne b02
+    cmp al,[board+5]    ; ... ..X ...
+    je won
+
+b02:
+    ; Third horizontal row
+    mov al,[board+6]    ; ... ... X..
+    cmp al,[board+7]    ; ... ... .X.
+    jne b03
+    cmp al,[board+8]    ; ... ... ..X
+    je won
+
+b03:
+    ; Middle vertical row
+    mov al,[board+1]    ; .X. ... ...
+    cmp al,[board+4]    ; ... .X. ...
+    jne b06
+    cmp al, [board+7]   ; ... ... .X.
+    je won
+
+b06:
+    ; Rightmost vertical row
+    mov al,[board+2]    ; ..X ... ...
+    cmp al,[board+5]    ; ... ..X ...
+    jne b07
+    cmp al,[board+8]    ; ... ... ..X
+    je won
+
+b07:
+    ; Second diagonal
+    cmp al,[board+4]    ; ... .X. ...
+    jne b08
+    cmp al,[board+6]    ; ... ... X..
+    je won
+
+b08:
+    ret
+
+won:
+    ; At this point AL contains the letter wich made the line 
+    call display_letter
+    mov al,0x20         ; space
+    call display_letter
+    mov al,0x77         ; w
+    call display_letter
+    mov al,0x69           ; i
+    call display_letter
+    mov al,0x6e         ; n
+    call display_letter
+    mov al,0x73         ; s
+    call display_letter
+    int 0x20
 
     ; Display letter contained in AL (ASCII code)
 display_letter:
