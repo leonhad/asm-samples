@@ -1,0 +1,8 @@
+all: CIRCLES.COM
+
+clean:
+	del *.COM
+	del *.LST
+
+CIRCLES.COM: CIRCLES.ASM
+	nasm -f bin CIRCLES.ASM -o CIRCLES.COM -l CIRCLES.LST
