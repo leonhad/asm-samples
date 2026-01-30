@@ -1,0 +1,8 @@
+all: PALETTE.COM
+
+clean:
+	del *.COM
+	del *.LST
+
+PALETTE.COM: PALETTE.ASM
+	nasm -f bin PALETTE.ASM -o PALETTE.COM -l PALETTE.LST
